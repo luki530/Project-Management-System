@@ -5,13 +5,13 @@
 	<persistence-unit name="projectmanagementsystem"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<class>pl.com.tt.Administrator</class>
-		<class>pl.com.tt.Document</class>
-		<class>pl.com.tt.Engineer</class>
-		<class>pl.com.tt.Hr</class>
-		<class>pl.com.tt.Manager</class>
-		<class>pl.com.tt.Project</class>
-		<class>pl.com.tt.User</class>
+		<class>pl.com.tt.databaseModel.Administrator</class>
+		<class>pl.com.tt.databaseModel.Document</class>
+		<class>pl.com.tt.databaseModel.Engineer</class>
+		<class>pl.com.tt.databaseModel.Hr</class>
+		<class>pl.com.tt.databaseModel.Manager</class>
+		<class>pl.com.tt.databaseModel.Project</class>
+		<class>pl.com.tt.databaseModel.User</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:mysql://localhost/projectmanagementsystem" />

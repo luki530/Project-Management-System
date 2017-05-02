@@ -1,4 +1,4 @@
-package pl.com.tt;
+package pl.com.tt.databaseModel;
 
 import java.io.Serializable;
 import javax.persistence.*;
