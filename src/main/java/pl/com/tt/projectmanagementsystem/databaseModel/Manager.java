@@ -1,17 +1,17 @@
-package pl.com.tt.databaseModel;
+package pl.com.tt.projectmanagementsystem.databaseModel;
 
 import java.io.Serializable;
 import javax.persistence.*;
 
 
 /**
- * The persistent class for the engineers database table.
+ * The persistent class for the managers database table.
  * 
  */
 @Entity
-@Table(name="engineers")
-@NamedQuery(name="Engineer.findAll", query="SELECT e FROM Engineer e")
-public class Engineer implements Serializable {
+@Table(name="managers")
+@NamedQuery(name="Manager.findAll", query="SELECT m FROM Manager m")
+public class Manager implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -27,7 +27,7 @@ public class Engineer implements Serializable {
 	@JoinColumn(name="user")
 	private User userBean;
 
-	public Engineer() {
+	public Manager() {
 	}
 
 	public int getId() {
