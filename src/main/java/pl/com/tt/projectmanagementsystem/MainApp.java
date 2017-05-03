@@ -15,7 +15,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        
+        new Object();
         User user = new User();
         user.setLogin("login3");
         user.setFirstName("fname");
