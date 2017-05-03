@@ -10,11 +10,11 @@ public class Startup {
 
 	public static void main(String[] args) {
 		User user = new User();
-		user.setLogin("luki530");
-		user.setFirstName("£ukasz");
-		user.setLastName("Oszczypa³a");
-		user.setPassword("testpassword");
-		user.setE_mail("lukasz.oszczypala@gmail.com");
+		user.setLogin("login2");
+		user.setFirstName("fname");
+		user.setLastName("lname");
+		user.setPassword("passwd");
+		user.setE_mail("mail@mail.com");
 
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("projectmanagementsystem");
 		EntityManager em = emf.createEntityManager();
