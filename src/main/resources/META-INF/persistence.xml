@@ -5,12 +5,10 @@
 	version="2.1">
 	<persistence-unit name="projectmanagementsystem">
 		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-		<class>pl.com.tt.projectmanagementsystem.databaseModel.Administrator</class>
 		<class>pl.com.tt.projectmanagementsystem.databaseModel.Document</class>
-		<class>pl.com.tt.projectmanagementsystem.databaseModel.Engineer</class>
-		<class>pl.com.tt.projectmanagementsystem.databaseModel.Hr</class>
-		<class>pl.com.tt.projectmanagementsystem.databaseModel.Manager</class>
+		<class>pl.com.tt.projectmanagementsystem.databaseModel.ProjectRole</class>
 		<class>pl.com.tt.projectmanagementsystem.databaseModel.Project</class>
+		<class>pl.com.tt.projectmanagementsystem.databaseModel.Role</class>
 		<class>pl.com.tt.projectmanagementsystem.databaseModel.User</class>
 		<properties>
 			<property name="javax.persistence.jdbc.url"

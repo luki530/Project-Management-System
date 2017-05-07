@@ -17,8 +17,7 @@ public class ProjectRole implements Serializable {
 	@Id
 	private int id;
 
-	@Lob
-	private String role;
+	private int role;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -41,11 +40,11 @@ public class ProjectRole implements Serializable {
 		this.id = id;
 	}
 
-	public String getRole() {
+	public int getRole() {
 		return this.role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(int role) {
 		this.role = role;
 	}
 

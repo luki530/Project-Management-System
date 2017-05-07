@@ -18,27 +18,17 @@ public class Project implements Serializable {
 	@Id
 	private int id;
 
-	@Lob
 	private String description;
 
-	@Lob
 	private String title;
 
-	//bi-directional many-to-one association to Administrator
+	//bi-directional many-to-one association to Document
 	@OneToMany(mappedBy="projectBean")
-	private List<Administrator> administrators;
+	private List<Document> documents;
 
-	//bi-directional many-to-one association to Engineer
+	//bi-directional many-to-one association to ProjectRole
 	@OneToMany(mappedBy="projectBean")
-	private List<Engineer> engineers;
-
-	//bi-directional many-to-one association to Hr
-	@OneToMany(mappedBy="projectBean")
-	private List<Hr> hrs;
-
-	//bi-directional many-to-one association to Manager
-	@OneToMany(mappedBy="projectBean")
-	private List<Manager> managers;
+	private List<ProjectRole> projectRoles;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -72,92 +62,48 @@ public class Project implements Serializable {
 		this.title = title;
 	}
 
-	public List<Administrator> getAdministrators() {
-		return this.administrators;
+	public List<Document> getDocuments() {
+		return this.documents;
 	}
 
-	public void setAdministrators(List<Administrator> administrators) {
-		this.administrators = administrators;
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
 	}
 
-	public Administrator addAdministrator(Administrator administrator) {
-		getAdministrators().add(administrator);
-		administrator.setProjectBean(this);
+	public Document addDocument(Document document) {
+		getDocuments().add(document);
+		document.setProjectBean(this);
 
-		return administrator;
+		return document;
 	}
 
-	public Administrator removeAdministrator(Administrator administrator) {
-		getAdministrators().remove(administrator);
-		administrator.setProjectBean(null);
+	public Document removeDocument(Document document) {
+		getDocuments().remove(document);
+		document.setProjectBean(null);
 
-		return administrator;
+		return document;
 	}
 
-	public List<Engineer> getEngineers() {
-		return this.engineers;
+	public List<ProjectRole> getProjectRoles() {
+		return this.projectRoles;
 	}
 
-	public void setEngineers(List<Engineer> engineers) {
-		this.engineers = engineers;
+	public void setProjectRoles(List<ProjectRole> projectRoles) {
+		this.projectRoles = projectRoles;
 	}
 
-	public Engineer addEngineer(Engineer engineer) {
-		getEngineers().add(engineer);
-		engineer.setProjectBean(this);
+	public ProjectRole addProjectRole(ProjectRole projectRole) {
+		getProjectRoles().add(projectRole);
+		projectRole.setProjectBean(this);
 
-		return engineer;
+		return projectRole;
 	}
 
-	public Engineer removeEngineer(Engineer engineer) {
-		getEngineers().remove(engineer);
-		engineer.setProjectBean(null);
+	public ProjectRole removeProjectRole(ProjectRole projectRole) {
+		getProjectRoles().remove(projectRole);
+		projectRole.setProjectBean(null);
 
-		return engineer;
-	}
-
-	public List<Hr> getHrs() {
-		return this.hrs;
-	}
-
-	public void setHrs(List<Hr> hrs) {
-		this.hrs = hrs;
-	}
-
-	public Hr addHr(Hr hr) {
-		getHrs().add(hr);
-		hr.setProjectBean(this);
-
-		return hr;
-	}
-
-	public Hr removeHr(Hr hr) {
-		getHrs().remove(hr);
-		hr.setProjectBean(null);
-
-		return hr;
-	}
-
-	public List<Manager> getManagers() {
-		return this.managers;
-	}
-
-	public void setManagers(List<Manager> managers) {
-		this.managers = managers;
-	}
-
-	public Manager addManager(Manager manager) {
-		getManagers().add(manager);
-		manager.setProjectBean(this);
-
-		return manager;
-	}
-
-	public Manager removeManager(Manager manager) {
-		getManagers().remove(manager);
-		manager.setProjectBean(null);
-
-		return manager;
+		return projectRole;
 	}
 
 	public User getUser() {

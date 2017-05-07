@@ -17,19 +17,21 @@ public class Document implements Serializable {
 	@Id
 	private int id;
 
-	@Lob
 	private String description;
 
-	@Lob
 	private String title;
 
-	@Lob
 	private String topic;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="creator")
 	private User user;
+
+	//bi-directional many-to-one association to Project
+	@ManyToOne
+	@JoinColumn(name="project")
+	private Project projectBean;
 
 	public Document() {
 	}
@@ -72,6 +74,14 @@ public class Document implements Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public Project getProjectBean() {
+		return this.projectBean;
+	}
+
+	public void setProjectBean(Project projectBean) {
+		this.projectBean = projectBean;
 	}
 
 }
