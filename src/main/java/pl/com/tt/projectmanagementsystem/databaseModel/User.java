@@ -1,8 +1,15 @@
 package pl.com.tt.projectmanagementsystem.databaseModel;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 /**
@@ -18,6 +25,8 @@ public class User implements Serializable {
 	@Id
 	private String login;
 
+	private boolean administrator;
+
 	@Column(name="`e-mail`")
 	private String e_mail;
 
@@ -28,6 +37,9 @@ public class User implements Serializable {
 	private String lastName;
 
 	private String password;
+	
+	@Transient
+	private List<String> permissions;
 
 	//bi-directional many-to-one association to Document
 	@OneToMany(mappedBy="user")
@@ -50,6 +62,14 @@ public class User implements Serializable {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+
+	public boolean getAdministrator() {
+		return this.administrator;
+	}
+
+	public void setAdministrator(boolean administrator) {
+		this.administrator = administrator;
 	}
 
 	public String getE_mail() {

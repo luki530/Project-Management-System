@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Users>
+	<User name="ADMINISTRATOR">
+		<permissions>
+		createNewUser
+		addUserToRole
+		createProject
+		deleteProject
+		listAllProjects
+		showProjectsForCriteria
+		showInformationsAboutProject
+		</permissions>
+	</User>
+	<User name="MANAGER">
+		<permissions>
+		addUserToRole
+		deleteProject
+		showDocuments
+		showInformationsAboutProject
+		createDocument
+		deleteDocument
+		viewDocuments
+		</permissions>
+	</User>
+	<User name="ENGINEER">
+		<permissions>
+		createDocument
+		viewDocuments
+		</permissions>
+	</User>
+	<User name="HR">
+		<permissions>
+		viewDocuments
+		</permissions>
+	</User>
+</Users>

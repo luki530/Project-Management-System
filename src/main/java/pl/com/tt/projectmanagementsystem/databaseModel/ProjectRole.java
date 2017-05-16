@@ -17,8 +17,6 @@ public class ProjectRole implements Serializable {
 	@Id
 	private int id;
 
-	private int role;
-
 	//bi-directional many-to-one association to User
 	@ManyToOne
 	@JoinColumn(name="user")
@@ -29,6 +27,11 @@ public class ProjectRole implements Serializable {
 	@JoinColumn(name="project")
 	private Project projectBean;
 
+	//bi-directional many-to-one association to Role
+	@ManyToOne
+	@JoinColumn(name="role")
+	private Role roleBean;
+
 	public ProjectRole() {
 	}
 
@@ -38,14 +41,6 @@ public class ProjectRole implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getRole() {
-		return this.role;
-	}
-
-	public void setRole(int role) {
-		this.role = role;
 	}
 
 	public User getUserBean() {
@@ -62,6 +57,14 @@ public class ProjectRole implements Serializable {
 
 	public void setProjectBean(Project projectBean) {
 		this.projectBean = projectBean;
+	}
+
+	public Role getRoleBean() {
+		return this.roleBean;
+	}
+
+	public void setRoleBean(Role roleBean) {
+		this.roleBean = roleBean;
 	}
 
 }

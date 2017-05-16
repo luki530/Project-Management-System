@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Users>
+	<User name="ADMINISTRATOR">
+		<permissions>
+			<permission name="createNewUser" />
+			<permission name="addUserToRole" />
+			<permission name="createProject" />
+			<permission name="deleteProject" />
+			<permission name="listAllProjects" />
+			<permission name="showProjectsForCriteria" />
+			<permission name="showInformationsAboutProject" />
+		</permissions>
+	</User>
+	<User name="MANAGER">
+		<permissions>
+			<permission name="addUserToRole" />
+			<permission name="deleteProject" />
+			<permission name="showDocuments" />
+			<permission name="showInformationsAboutProject" />
+			<permission name="createDocument" />
+			<permission name="deleteDocument" />
+			<permission name="viewDocuments" />
+		</permissions>
+	</User>
+	<User name="ENGINEER">
+		<permissions>
+			<permission name="createDocument" />
+			<permission name="viewDocuments" />
+		</permissions>
+	</User>
+	<User name="HR">
+		<permissions>
+			<permission name="viewDocuments" />
+		</permissions>
+	</User>
+</Users>

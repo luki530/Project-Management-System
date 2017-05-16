@@ -2,6 +2,7 @@ package pl.com.tt.projectmanagementsystem.databaseModel;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -18,6 +19,10 @@ public class Role implements Serializable {
 	private int id;
 
 	private String role;
+
+	//bi-directional many-to-one association to ProjectRole
+	@OneToMany(mappedBy="roleBean")
+	private List<ProjectRole> projectRoles;
 
 	public Role() {
 	}
@@ -36,6 +41,28 @@ public class Role implements Serializable {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public List<ProjectRole> getProjectRoles() {
+		return this.projectRoles;
+	}
+
+	public void setProjectRoles(List<ProjectRole> projectRoles) {
+		this.projectRoles = projectRoles;
+	}
+
+	public ProjectRole addProjectRole(ProjectRole projectRole) {
+		getProjectRoles().add(projectRole);
+		projectRole.setRoleBean(this);
+
+		return projectRole;
+	}
+
+	public ProjectRole removeProjectRole(ProjectRole projectRole) {
+		getProjectRoles().remove(projectRole);
+		projectRole.setRoleBean(null);
+
+		return projectRole;
 	}
 
 }
