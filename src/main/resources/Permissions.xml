@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<roles-permissions>
+	<role>
+		<name>ADMINISTRATOR</name>
+		<action>createNewUser</action>
+		<action>addUserToRole</action>
+		<action>createProject</action>
+		<action>deleteProject</action>
+		<action>listAllProjects</action>
+		<action>showProjectsForCriteria</action>
+		<action>showInformationsAboutProject</action>
+	</role>
+	<role>
+		<name>MANAGER</name>
+		<action>addUserToRole</action>
+		<action>deleteProject</action>
+		<action>showDocuments</action>
+		<action>showInformationsAboutProject</action>
+		<action>createDocument</action>
+		<action>deleteDocument</action>
+		<action>viewDocuments</action>
+	</role>
+	<role>
+		<name>ENGINEER</name>
+		<action>createDocument</action>
+		<action>viewDocuments</action>
+	</role>
+	<role>
+		<name>HR</name>
+		<action>viewDocuments</action>
+	</role>
+</roles-permissions>
