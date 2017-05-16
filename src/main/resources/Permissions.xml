@@ -2,31 +2,39 @@
 <roles-permissions>
 	<role>
 		<name>ADMINISTRATOR</name>
-		<action>createNewUser</action>
-		<action>addUserToRole</action>
-		<action>createProject</action>
-		<action>deleteProject</action>
-		<action>listAllProjects</action>
-		<action>showProjectsForCriteria</action>
-		<action>showInformationsAboutProject</action>
+		<actions>
+			<action>createNewUser</action>
+			<action>addUserToRole</action>
+			<action>createProject</action>
+			<action>deleteProject</action>
+			<action>listAllProjects</action>
+			<action>showProjectsForCriteria</action>
+			<action>showInformationsAboutProject</action>
+		</actions>
 	</role>
 	<role>
 		<name>MANAGER</name>
-		<action>addUserToRole</action>
-		<action>deleteProject</action>
-		<action>showDocuments</action>
-		<action>showInformationsAboutProject</action>
-		<action>createDocument</action>
-		<action>deleteDocument</action>
-		<action>viewDocuments</action>
+		<actions>
+			<action>addUserToRole</action>
+			<action>deleteProject</action>
+			<action>showDocuments</action>
+			<action>showInformationsAboutProject</action>
+			<action>createDocument</action>
+			<action>deleteDocument</action>
+			<action>viewDocuments</action>
+		</actions>
 	</role>
 	<role>
 		<name>ENGINEER</name>
-		<action>createDocument</action>
-		<action>viewDocuments</action>
+		<actions>
+			<action>createDocument</action>
+			<action>viewDocuments</action>
+		</actions>
 	</role>
 	<role>
 		<name>HR</name>
-		<action>viewDocuments</action>
+		<actions>
+			<action>viewDocuments</action>
+		</actions>
 	</role>
 </roles-permissions>

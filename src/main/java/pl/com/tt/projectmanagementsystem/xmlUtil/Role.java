@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 public class Role {
 
     private String name;
+    
+    @XmlElementWrapper(name="actions")
     @XmlElement(name = "action")
     private List<String> actions = new ArrayList<>();
 
