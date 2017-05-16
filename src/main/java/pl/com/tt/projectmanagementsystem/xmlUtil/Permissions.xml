@@ -2,35 +2,35 @@
 <Users>
 	<User name="ADMINISTRATOR">
 		<permissions>
-		createNewUser
-		addUserToRole
-		createProject
-		deleteProject
-		listAllProjects
-		showProjectsForCriteria
-		showInformationsAboutProject
+			<permission>createNewUser</permission>
+			<permission>addUserToRole</permission>
+			<permission>createProject</permission>
+			<permission>deleteProject</permission>
+			<permission>listAllProjects</permission>
+			<permission>showProjectsForCriteria</permission>
+			<permission>showInformationsAboutProject</permission>
 		</permissions>
 	</User>
 	<User name="MANAGER">
 		<permissions>
-		addUserToRole
-		deleteProject
-		showDocuments
-		showInformationsAboutProject
-		createDocument
-		deleteDocument
-		viewDocuments
+			<permission>addUserToRole</permission>
+			<permission>deleteProject</permission>
+			<permission>showDocuments</permission>
+			<permission>showInformationsAboutProject</permission>
+			<permission>createDocument</permission>
+			<permission>deleteDocument</permission>
+			<permission>viewDocuments</permission>
 		</permissions>
 	</User>
 	<User name="ENGINEER">
 		<permissions>
-		createDocument
-		viewDocuments
+			<permission>createDocument</permission>
+			<permission>viewDocuments</permission>
 		</permissions>
 	</User>
 	<User name="HR">
 		<permissions>
-		viewDocuments
+			<permission>viewDocuments</permission>
 		</permissions>
 	</User>
 </Users>
