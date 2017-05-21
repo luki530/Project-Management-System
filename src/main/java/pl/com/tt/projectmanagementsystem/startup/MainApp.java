@@ -1,4 +1,4 @@
-package pl.com.tt.projectmanagementsystem;
+package pl.com.tt.projectmanagementsystem.startup;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -25,7 +25,7 @@ public class MainApp extends Application {
 		user.setLastName("lname");
 		user.setPassword("passwd");
 		user.setE_mail("mail@mail.com");
-		
+	
 		Project p = new Project();
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("projectmanagementsystem");

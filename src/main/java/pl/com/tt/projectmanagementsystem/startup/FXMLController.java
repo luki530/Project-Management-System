@@ -1,4 +1,4 @@
-package pl.com.tt.projectmanagementsystem;
+package pl.com.tt.projectmanagementsystem.startup;
 
 import java.net.URL;
 import java.util.ResourceBundle;

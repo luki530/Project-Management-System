@@ -1,4 +1,4 @@
-package pl.com.tt.projectmanagementsystem;
+package pl.com.tt.projectmanagementsystem.startup;
 
 import java.io.InputStream;
 import java.util.List;
