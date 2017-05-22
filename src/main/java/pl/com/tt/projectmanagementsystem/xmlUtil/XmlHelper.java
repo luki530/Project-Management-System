@@ -11,7 +11,6 @@ import javax.xml.bind.Unmarshaller;
 public class XmlHelper {
 
     private static final String RESOURCE_NAME = "Permissions.xml";
-    private InputStream resourceInputStream;
     
     public List<String> getPermissions(String role) {
         List<String> permissions = new ArrayList<>();
@@ -31,8 +30,13 @@ public class XmlHelper {
     }
     
     private RolesPermissions unmarshallRolessPermissions() throws JAXBException {
+        InputStream resourceInputStream = createResourceInputStream();
         Unmarshaller jaxbUnmarshaller = createJaxbUnmarshaller();
         return (RolesPermissions) jaxbUnmarshaller.unmarshal(resourceInputStream);
+    }
+
+    private InputStream createResourceInputStream() {
+        return ClassLoader.getSystemResourceAsStream(RESOURCE_NAME);
     }
     
     private Unmarshaller createJaxbUnmarshaller() throws JAXBException {
@@ -41,12 +45,7 @@ public class XmlHelper {
     }
     
     private JAXBContext createJAXBContext() throws JAXBException {
-        resourceInputStream = createResourceInputStream();
         return JAXBContext.newInstance(RolesPermissions.class);
-    }
-
-    private InputStream createResourceInputStream() {
-        return ClassLoader.getSystemResourceAsStream(RESOURCE_NAME);
     }
 
 }
