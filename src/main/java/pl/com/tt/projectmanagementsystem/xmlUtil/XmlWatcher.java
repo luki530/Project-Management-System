@@ -1,5 +1,6 @@
 package pl.com.tt.projectmanagementsystem.xmlUtil;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -27,9 +28,8 @@ public class XmlWatcher implements Runnable {
 		try {
 			XmlWatcher.fileSystem = FileSystems.getDefault();
 			XmlWatcher.watcher = XmlWatcher.fileSystem.newWatchService();
-			URL url = getClass().getResource("Permissions.xml");
-			URI uri = url.toURI();
-			XmlWatcher.xmlDirectory = Paths.get(uri);
+			File file = new File("Permissions.xml");
+			XmlWatcher.xmlDirectory = Paths.get(URI.create(file.getPath()));
 			XmlWatcher.watchKey = xmlDirectory.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY);
 			for (;;) {
 				for (WatchEvent<?> event : watchKey.pollEvents()) {
@@ -38,9 +38,6 @@ public class XmlWatcher implements Runnable {
 			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
