@@ -6,33 +6,31 @@ import pl.com.tt.projectmanagementsystem.databaseModel.User;
 
 public class AppContext {
 	
-	private User loggedUser = null;
-	private Project currentProject = null;
-	private Document currentDocument = null;
+	private static User loggedUser = null;
+	private static Project currentProject = null;
+	private static Document currentDocument = null;
 	
-	public Document getCurrentDocument() {
+	public static Document getCurrentDocument() {
 		return currentDocument;
 	}
-	public void setCurrentDocument(Document currentDocument) {
-		this.currentDocument = currentDocument;
+	public static void setCurrentDocument(Document currentDocument) {
+		AppContext.currentDocument = currentDocument;
+		AppContext.getLoggedUser().refreshPermissions();
 	}
-	public User getLoggedUser() {
+	public static User getLoggedUser() {
 		return loggedUser;
 	}
 	public void setLoggedUser(User loggedUser) {
-		this.loggedUser = loggedUser;
+		AppContext.loggedUser=loggedUser;
+		AppContext.getLoggedUser().refreshPermissions();
 	}
-	public Project getCurrentProject() {
+	public static Project getCurrentProject() {
 		return currentProject;
 	}
-	public void setCurrentProject(Project currentProject) {
-		this.currentProject = currentProject;
+	
+	public static void setCurrentProject(Project currentProject) {
+		AppContext.currentProject = currentProject;
+		AppContext.getLoggedUser().refreshPermissions();
 	}
 	
-	
-	
-	
-	
-	
-
 }

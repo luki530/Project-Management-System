@@ -1,32 +1,60 @@
 package pl.com.tt.projectmanagementsystem.xmlUtil;
 
-
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
-public class xmlHelper {
+public class XmlHelper {
 
-	RolesPermissions rp ;
-	InputStream file = ClassLoader.getSystemResourceAsStream("Permissions.xml");
-	JAXBContext jaxbContext = JAXBContext.newInstance(RolesPermissions.class);
-//	
-//	Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-//	
-//	rp=(RolesPermissions)jaxbUnmarshaller.unmarshal(file);
+	private static final String RESOURCE_NAME = "Permissions.xml";
 
-//	public List<String> getPermissions(String role) {
-//
-//		return null;
-//	}
-//	
-//	List<Role> roles = rp.getRoles();
-//    for (Role r : roles) {
-//        System.out.println(r.getName());
-//        List<String> actions = r.getActions();
-//        for (String a : actions) {
-//            System.out.println("\t" + a);
-//        }
-//    }
+	public static List<String> getPermissions(List<String> userRoles) {
+		List<String> permissions = new ArrayList<>();
+		RolesPermissions rolesPermissions = getRolesPermissionsFromResource();
+		List<Role> roles = rolesPermissions.getRoles();
+		for (String s : userRoles) {
+			for (Role r : roles) {
+				if (r.getName().equals(s)) {
+					for (String action : r.getActions()) {
+						permissions.add(action);
+					}
+				}
+			}
+		}
+		return permissions;
+	}
+
+	private static RolesPermissions getRolesPermissionsFromResource() {
+		RolesPermissions rolesPermissiosn = new RolesPermissions();
+		try {
+			rolesPermissiosn = unmarshallRolessPermissions();
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+		return rolesPermissiosn;
+	}
+
+	private static RolesPermissions unmarshallRolessPermissions() throws JAXBException {
+		InputStream resourceInputStream = createResourceInputStream();
+		Unmarshaller jaxbUnmarshaller = createJaxbUnmarshaller();
+		return (RolesPermissions) jaxbUnmarshaller.unmarshal(resourceInputStream);
+	}
+
+	private static InputStream createResourceInputStream() {
+		return ClassLoader.getSystemResourceAsStream(RESOURCE_NAME);
+	}
+
+	private static Unmarshaller createJaxbUnmarshaller() throws JAXBException {
+		JAXBContext jaxbContext = createJAXBContext();
+		return jaxbContext.createUnmarshaller();
+	}
+
+	private static JAXBContext createJAXBContext() throws JAXBException {
+		return JAXBContext.newInstance(RolesPermissions.class);
+	}
 
 }

@@ -1,6 +1,7 @@
 package pl.com.tt.projectmanagementsystem.databaseModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -11,46 +12,47 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import pl.com.tt.projectmanagementsystem.appContext.AppContext;
 
 /**
  * The persistent class for the users database table.
  * 
  */
 @Entity
-@Table(name="users")
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@Table(name = "users")
+@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String login;
-	@Column(name="administrator")
-	private boolean administrator=false;
+	@Column(name = "administrator")
+	private boolean administrator = false;
 
-	@Column(name="`e-mail`")
+	@Column(name = "`e-mail`")
 	private String e_mail;
 
-	@Column(name="first_name")
+	@Column(name = "first_name")
 	private String firstName;
 
-	@Column(name="last_name")
+	@Column(name = "last_name")
 	private String lastName;
 
 	private String password;
-	
+
 	@Transient
 	private List<String> permissions;
 
-	//bi-directional many-to-one association to Document
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to Document
+	@OneToMany(mappedBy = "user")
 	private List<Document> documents;
 
-	//bi-directional many-to-one association to ProjectRole
-	@OneToMany(mappedBy="userBean")
+	// bi-directional many-to-one association to ProjectRole
+	@OneToMany(mappedBy = "userBean")
 	private List<ProjectRole> projectRoles;
 
-	//bi-directional many-to-one association to Project
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to Project
+	@OneToMany(mappedBy = "user")
 	private List<Project> projects;
 
 	public User() {
@@ -169,13 +171,20 @@ public class User implements Serializable {
 
 		return project;
 	}
-	
-	public void refreshPermissions(){
-		if(this.administrator){
-			
-		}
-		
-		
-	}
 
+	public void refreshPermissions() {
+		List<String> userRoles = new ArrayList<>();
+		if (this.administrator) {
+			userRoles.add("ADMINISTRATOR");
+		}
+		List<ProjectRole> projectRoles = this.getProjectRoles();
+		for (ProjectRole pr : projectRoles) {
+			if (pr.getProjectBean().equals(AppContext.getCurrentProject())) {
+				userRoles.add(pr.getRoleBean().getRole());
+			}
+		}
+		if (AppContext.getCurrentDocument().getUser().equals(this)) {
+			userRoles.add("EDIT DOCUMENT");
+		}
+	}
 }
