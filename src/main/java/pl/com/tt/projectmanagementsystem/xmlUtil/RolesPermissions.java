@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="roles-permissions")
 public class RolesPermissions {
-
+	
     @XmlElement(name="role")
     private List<Role> roles = new ArrayList<>();
 

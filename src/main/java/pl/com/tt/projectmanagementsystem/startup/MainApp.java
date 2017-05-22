@@ -4,29 +4,27 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import pl.com.tt.projectmanagementsystem.databaseModel.User;
-import pl.com.tt.projectmanagementsystem.databaseModel.Project;
 
 public class MainApp extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		new Object();
 		User user = new User();
-		user.setLogin("login3");
-		user.setFirstName("fname");
-		user.setLastName("lname");
-		user.setPassword("passwd");
-		user.setE_mail("mail@mail.com");
+		user.setLogin("login9");
+		user.setFirstName("fname1");
+		user.setLastName("lname1");
+		user.setPassword("passwd1");
+		user.setE_mail("mail@mai1l.com");
+		user.setAdministrator(true);
+		
 	
-		Project p = new Project();
+		
 		
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("projectmanagementsystem");
 		EntityManager em = emf.createEntityManager();

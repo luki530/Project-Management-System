@@ -24,8 +24,8 @@ public class User implements Serializable {
 
 	@Id
 	private String login;
-
-	private boolean administrator;
+	@Column(name="administrator")
+	private boolean administrator=false;
 
 	@Column(name="`e-mail`")
 	private String e_mail;
@@ -168,6 +168,14 @@ public class User implements Serializable {
 		project.setUser(null);
 
 		return project;
+	}
+	
+	public void refreshPermissions(){
+		if(this.administrator){
+			
+		}
+		
+		
 	}
 
 }
