@@ -1,19 +1,7 @@
 package pl.com.tt.projectmanagementsystem.startup;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pl.com.tt.projectmanagementsystem.databaseModel.User;
-import pl.com.tt.projectmanagementsystem.xmlUtil.XmlHelper;
 import pl.com.tt.projectmanagementsystem.xmlUtil.XmlWatcher;
 
 public class MainApp extends Application {

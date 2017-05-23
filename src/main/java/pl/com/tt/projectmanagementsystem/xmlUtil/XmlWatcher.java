@@ -2,9 +2,6 @@ package pl.com.tt.projectmanagementsystem.xmlUtil;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
@@ -14,7 +11,7 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 
-import com.sun.xml.xsom.impl.util.Uri;
+import pl.com.tt.projectmanagementsystem.appContext.AppContext;
 
 public class XmlWatcher implements Runnable {
 	static FileSystem fileSystem;
@@ -29,11 +26,11 @@ public class XmlWatcher implements Runnable {
 			XmlWatcher.fileSystem = FileSystems.getDefault();
 			XmlWatcher.watcher = XmlWatcher.fileSystem.newWatchService();
 			File file = new File("Permissions.xml");
-			XmlWatcher.xmlDirectory = Paths.get(URI.create(file.getPath()));
+			XmlWatcher.xmlDirectory = Paths.get(file.getAbsolutePath()+"\\..\\");
 			XmlWatcher.watchKey = xmlDirectory.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY);
 			for (;;) {
 				for (WatchEvent<?> event : watchKey.pollEvents()) {
-					System.out.println("EDYTOWALES PLIK !!!!");
+					AppContext.getLoggedUser().refreshPermissions();
 				}
 			}
 
