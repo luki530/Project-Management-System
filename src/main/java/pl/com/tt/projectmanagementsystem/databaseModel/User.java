@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import pl.com.tt.projectmanagementsystem.appContext.AppContext;
+import pl.com.tt.projectmanagementsystem.persistence.Persistable;
 
 /**
  * The persistent class for the users database table.
@@ -21,7 +22,7 @@ import pl.com.tt.projectmanagementsystem.appContext.AppContext;
 @Entity
 @Table(name = "users")
 @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
-public class User implements Serializable {
+public class User implements Serializable, Persistable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -58,7 +59,7 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public String getLogin() {
+	public Object getId() {
 		return this.login;
 	}
 

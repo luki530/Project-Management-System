@@ -1,7 +1,15 @@
 package pl.com.tt.projectmanagementsystem.databaseModel;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+import pl.com.tt.projectmanagementsystem.persistence.Persistable;
 
 
 /**
@@ -11,7 +19,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="documents")
 @NamedQuery(name="Document.findAll", query="SELECT d FROM Document d")
-public class Document implements Serializable {
+public class Document implements Serializable, Persistable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -36,7 +44,7 @@ public class Document implements Serializable {
 	public Document() {
 	}
 
-	public int getId() {
+	public Object getId() {
 		return this.id;
 	}
 

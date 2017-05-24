@@ -3,6 +3,8 @@ package pl.com.tt.projectmanagementsystem.databaseModel;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import pl.com.tt.projectmanagementsystem.persistence.Persistable;
+
 
 /**
  * The persistent class for the project_roles database table.
@@ -11,7 +13,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="project_roles")
 @NamedQuery(name="ProjectRole.findAll", query="SELECT p FROM ProjectRole p")
-public class ProjectRole implements Serializable {
+public class ProjectRole implements Serializable, Persistable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -35,7 +37,7 @@ public class ProjectRole implements Serializable {
 	public ProjectRole() {
 	}
 
-	public int getId() {
+	public Object getId() {
 		return this.id;
 	}
 

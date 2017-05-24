@@ -2,6 +2,9 @@ package pl.com.tt.projectmanagementsystem.databaseModel;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import pl.com.tt.projectmanagementsystem.persistence.Persistable;
+
 import java.util.List;
 
 
@@ -12,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name="projects")
 @NamedQuery(name="Project.findAll", query="SELECT p FROM Project p")
-public class Project implements Serializable {
+public class Project implements Serializable, Persistable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -38,7 +41,7 @@ public class Project implements Serializable {
 	public Project() {
 	}
 
-	public int getId() {
+	public Object getId() {
 		return this.id;
 	}
 
