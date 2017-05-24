@@ -1,5 +1,8 @@
 package pl.com.tt.projectmanagementsystem.persistence;
 
+import java.util.Collection;
+import java.util.List;
+
 public interface PersistenceManager {
 	
 	
@@ -10,6 +13,8 @@ public interface PersistenceManager {
 	public Persistable delete(Persistable persistable);
 
 	public Persistable get(Persistable persistable);
+
+	public Collection<Persistable> findAll(Class modelClass);
 
 
 }

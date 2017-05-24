@@ -1,8 +1,11 @@
 package pl.com.tt.projectmanagementsystem.startup;
 
+import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.User;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
-import pl.com.tt.projectmanagementsystem.xmlUtil.XmlWatcher;
+import pl.com.tt.projectmanagementsystem.persistence.PersistenceManager;
+import pl.com.tt.projectmanagementsystem.persistence.sql.SQLPersistenceManager;
 
 public class MainApp extends Application {
 
@@ -43,8 +46,10 @@ public class MainApp extends Application {
 		// for(String s: permissions){
 		// System.out.println(s);
 		// }
-
-		XmlWatcher.start();
+//		XmlWatcher.start();
+		
+		PersistenceManager spm = SQLPersistenceManager.getInstance();
+		System.out.println(spm.findAll(User.class).toString());
 
 	}
 
