@@ -29,7 +29,7 @@ public class JPAPersistenceManager implements PersistenceManager {
 	}
 	
 	@Override
-	public Persistable find(Persistable persistable, long id) {
+	public Persistable find(Persistable persistable, Object id) {
 	    return entityManager.find(persistable.getClass(), id);
 	}
 	

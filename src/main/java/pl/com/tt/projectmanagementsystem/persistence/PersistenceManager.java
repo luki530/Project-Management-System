@@ -12,7 +12,7 @@ public interface PersistenceManager {
 	
 	public Persistable delete(Persistable persistable);
 
-	public Persistable find(Persistable persistable, long id);
+	public Persistable find(Persistable persistable, Object id);
 
 	public List<Persistable> findAll(Persistable persistable);
 
