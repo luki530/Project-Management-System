@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 import pl.com.tt.projectmanagementsystem.actions.Action;
 import pl.com.tt.projectmanagementsystem.persistence.PersistenceManager;
-import pl.com.tt.projectmanagementsystem.persistence.sql.SQLPersistenceManager;
+import pl.com.tt.projectmanagementsystem.persistence.sql.JPAPersistenceManager;
 import pl.com.tt.projectmanagementsystem.userInterface.UserInterface;
 import pl.com.tt.projectmanagementsystem.userInterface.graphicUI.GraphicUserInterface;
 
@@ -37,7 +37,7 @@ public class MainConfiguration {
 
 		MainConfiguration config = new MainConfiguration();
 		UserInterface userInterface = GraphicUserInterface.getInstance();
-		PersistenceManager persistenceManager = SQLPersistenceManager.getInstance();
+		PersistenceManager persistenceManager = JPAPersistenceManager.getInstance();
 		
 		
 		

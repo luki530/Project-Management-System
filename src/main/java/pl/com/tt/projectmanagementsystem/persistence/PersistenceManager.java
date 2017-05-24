@@ -12,9 +12,8 @@ public interface PersistenceManager {
 	
 	public Persistable delete(Persistable persistable);
 
-	public Persistable get(Persistable persistable);
+	public Persistable find(Persistable persistable, long id);
 
-	public Collection<Persistable> findAll(Class modelClass);
-
+	public List<Persistable> findAll(Persistable persistable);
 
 }

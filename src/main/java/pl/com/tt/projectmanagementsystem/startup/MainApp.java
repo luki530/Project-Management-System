@@ -1,11 +1,13 @@
 package pl.com.tt.projectmanagementsystem.startup;
 
-import com.sun.tools.xjc.reader.xmlschema.bindinfo.BIConversion.User;
+import java.util.List;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import pl.com.tt.projectmanagementsystem.databaseModel.User;
+import pl.com.tt.projectmanagementsystem.persistence.Persistable;
 import pl.com.tt.projectmanagementsystem.persistence.PersistenceManager;
-import pl.com.tt.projectmanagementsystem.persistence.sql.SQLPersistenceManager;
+import pl.com.tt.projectmanagementsystem.startup.configuration.MainConfiguration;
 
 public class MainApp extends Application {
 
@@ -46,11 +48,20 @@ public class MainApp extends Application {
 		// for(String s: permissions){
 		// System.out.println(s);
 		// }
-//		XmlWatcher.start();
-		
-		PersistenceManager spm = SQLPersistenceManager.getInstance();
-		System.out.println(spm.findAll(User.class).toString());
-
+	    // XmlWatcher.start();
+	    
+	    MainConfiguration config = new MainConfiguration();
+	    PersistenceManager mp = config.getPersistenceManager();
+	    User user = new User();
+	    /*
+	     * Brzydkie rzutowanie, ale skoro sami przekazujemy do metody obiekt User,
+	     * to mamy pewność, że zwróci nam listę obiektów typu User
+	     */
+	    List<User> foundUsers = (List<User>)(List<?>) mp.findAll(user);
+	    /*
+	     * Jak wyżej...
+	     */
+	    User foundUser = (User) mp.find(user, 1);
 	}
 
 	/**
