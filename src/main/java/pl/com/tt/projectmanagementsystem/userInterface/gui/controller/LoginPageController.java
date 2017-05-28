@@ -36,18 +36,19 @@ public class LoginPageController implements Initializable {
         Action loginAction = new LoginAction();
         loginAction.setParameter("login", login.getText());
         loginAction.setParameter("password", password.getText());
-        
-        Task task = new Task<Void>() {
-            @Override public Void call() {
+//        Task task = new Task<Void>() {
+//            @Override public Void call() {
+            	
                     gui.addActionToQueue(loginAction);
                     result = gui.getActionResultFromQueue();
                     while (result == null) {
                         result = gui.getActionResultFromQueue();
                     }
+                    System.out.println("login");
                     doSomethingWithResults(result);
-                return null;
-            }
-        };
+//                return null;
+//            }
+//        };
         
     }
     
