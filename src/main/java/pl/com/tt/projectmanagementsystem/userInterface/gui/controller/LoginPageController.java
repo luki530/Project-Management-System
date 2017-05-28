@@ -1,17 +1,15 @@
 package pl.com.tt.projectmanagementsystem.userInterface.gui.controller;
 
-import java.awt.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 import pl.com.tt.projectmanagementsystem.actions.Action;
 import pl.com.tt.projectmanagementsystem.actions.ActionResult;
 import pl.com.tt.projectmanagementsystem.actions.implementations.LoginAction;
-import pl.com.tt.projectmanagementsystem.appContext.AppContext;
-import pl.com.tt.projectmanagementsystem.userInterface.UserInterface;
 import pl.com.tt.projectmanagementsystem.userInterface.gui.GraphicsUserInterface;
 
 public class LoginPageController implements Initializable {

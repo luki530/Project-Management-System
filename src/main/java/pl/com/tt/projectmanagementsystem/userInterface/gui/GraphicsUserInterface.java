@@ -1,6 +1,7 @@
 package pl.com.tt.projectmanagementsystem.userInterface.gui;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -8,9 +9,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pl.com.tt.projectmanagementsystem.actions.Action;
 import pl.com.tt.projectmanagementsystem.actions.ActionResult;
+import pl.com.tt.projectmanagementsystem.startup.configuration.MainApp;
 import pl.com.tt.projectmanagementsystem.userInterface.UserInterface;
 import pl.com.tt.projectmanagementsystem.userInterface.gui.controller.LoginPageController;
 
@@ -72,11 +75,12 @@ public class GraphicsUserInterface implements UserInterface {
         switch (sceneName) {
         case "homePage":
             LoginPageController controller = new LoginPageController(this);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("fxml/Scene.fxml"));     
+            URL url = getClass().getClassLoader().getResource("fxml/Scene.fxml");
+            FXMLLoader fxmlLoader = new FXMLLoader(url);     
             fxmlLoader.setController(controller);
-            Parent root = null;
+            AnchorPane root = null;
             try {
-                root = (Parent)fxmlLoader.load();
+                root = fxmlLoader.load();
             } catch (IOException e) {
                 e.printStackTrace();
             }          

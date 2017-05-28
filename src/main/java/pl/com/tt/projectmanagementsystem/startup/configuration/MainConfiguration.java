@@ -56,9 +56,8 @@ public class MainConfiguration {
 
 	public static MainConfiguration createDevelopmentConfigWithGui() {
 		MainConfiguration config = new MainConfiguration();
-		UserInterface userInterface = GraphicsUserInterface.getInstance();
-		PersistenceManager persistenceManager = JPAPersistenceManager.getInstance();
-		config.setPersistenceManager(persistenceManager);
+		//PersistenceManager persistenceManager = JPAPersistenceManager.getInstance();
+		//config.setPersistenceManager(persistenceManager);
 		config.setActions(initializeActions());
 		return config;
 	}
