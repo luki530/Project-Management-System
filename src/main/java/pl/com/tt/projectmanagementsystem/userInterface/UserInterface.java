@@ -1,23 +1,20 @@
 package pl.com.tt.projectmanagementsystem.userInterface;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 
 import pl.com.tt.projectmanagementsystem.actions.Action;
 import pl.com.tt.projectmanagementsystem.actions.ActionResult;
 
 public interface UserInterface{
 	
-	void showError();
+	void addActionResultToQueue(ActionResult actionResult); 
 	
-	public void addActionResult(ActionResult actionResult); 
+	ActionResult getActionResultFromQueue();
 	
-	void showMessage(String message);
-
-	Map<String, String> getParameters(List<String> parameters);
+	Map<String, Object> getParameters();
 	
+	Action getActionFromQueue();
 	
-
+	void addActionToQueue(Action action);
 }

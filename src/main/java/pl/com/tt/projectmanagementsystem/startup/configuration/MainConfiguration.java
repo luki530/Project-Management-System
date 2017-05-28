@@ -7,7 +7,7 @@ import pl.com.tt.projectmanagementsystem.actions.Action;
 import pl.com.tt.projectmanagementsystem.persistence.PersistenceManager;
 import pl.com.tt.projectmanagementsystem.persistence.sql.JPAPersistenceManager;
 import pl.com.tt.projectmanagementsystem.userInterface.UserInterface;
-import pl.com.tt.projectmanagementsystem.userInterface.graphicUI.GraphicUserInterface;
+import pl.com.tt.projectmanagementsystem.userInterface.gui.GraphicsUserInterface;
 import pl.com.tt.projectmanagementsystem.xmlUtil.XmlWatcher;
 
 public class MainConfiguration {
@@ -54,16 +54,12 @@ public class MainConfiguration {
 		this.actions = actions;
 	}
 
-	public static MainConfiguration createDevelopmentConfig() {
-
+	public static MainConfiguration createDevelopmentConfigWithGui() {
 		MainConfiguration config = new MainConfiguration();
-		UserInterface userInterface = GraphicUserInterface.getInstance();
+		UserInterface userInterface = GraphicsUserInterface.getInstance();
 		PersistenceManager persistenceManager = JPAPersistenceManager.getInstance();
-		config.setUserInterface(userInterface);
 		config.setPersistenceManager(persistenceManager);
 		config.setActions(initializeActions());
-		config.setXmlWatcher(new XmlWatcher());
-
 		return config;
 	}
 

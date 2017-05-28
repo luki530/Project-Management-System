@@ -1,25 +1,20 @@
 package pl.com.tt.projectmanagementsystem.actions;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-
 
 public abstract class Action {
 		
 	abstract public ActionResult doOperation();
 	
-	protected Map<String,Object> dataMap = new HashMap<String,Object>();
+	protected Map<String, Object> parameters = new HashMap<>();
 	
-	public Object getParam(String paramName) {
-		return dataMap.get(paramName);
+	public Object getParameter(String paramName) {
+		return parameters.get(paramName);
 	}
 	
-	public void setParam(String paramName, Object paramValue) {
-		dataMap.put(paramName, paramValue);
+	public void setParameter(String paramName, Object paramValue) {
+		parameters.put(paramName, paramValue);
 	}
-
-	
 	
 }
