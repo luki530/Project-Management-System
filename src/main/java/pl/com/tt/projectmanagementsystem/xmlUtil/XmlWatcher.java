@@ -26,7 +26,7 @@ public class XmlWatcher implements Runnable {
 			XmlWatcher.fileSystem = FileSystems.getDefault();
 			XmlWatcher.watcher = XmlWatcher.fileSystem.newWatchService();
 			File file = new File("Permissions.xml");
-			XmlWatcher.xmlDirectory = Paths.get(file.getAbsolutePath()+"\\..\\");
+			XmlWatcher.xmlDirectory = Paths.get(file.getAbsolutePath() + "\\..\\");
 			XmlWatcher.watchKey = xmlDirectory.register(watcher, StandardWatchEventKinds.ENTRY_MODIFY);
 			for (;;) {
 				for (WatchEvent<?> event : watchKey.pollEvents()) {
@@ -39,12 +39,6 @@ public class XmlWatcher implements Runnable {
 			e.printStackTrace();
 		}
 
-	}
-
-	public static void start() {
-		XmlWatcher xmlWatcher = new XmlWatcher();
-		Thread thread = new Thread(xmlWatcher);
-		thread.start();
 	}
 
 }
