@@ -1,5 +1,6 @@
 package pl.com.tt.projectmanagementsystem.userInterface.gui.controller;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -12,14 +13,15 @@ import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.HBox;
 import pl.com.tt.projectmanagementsystem.actions.ActionResult;
 import pl.com.tt.projectmanagementsystem.actions.implementations.ListProjectsAction;
+import pl.com.tt.projectmanagementsystem.appContext.AppContext;
 import pl.com.tt.projectmanagementsystem.databaseModel.Project;
+import pl.com.tt.projectmanagementsystem.databaseModel.User;
 import pl.com.tt.projectmanagementsystem.userInterface.gui.GraphicsUserInterface;
 
 public class HomePageController implements Initializable {
@@ -27,30 +29,29 @@ public class HomePageController implements Initializable {
 	private GraphicsUserInterface gui;
 	private ActionResult result;
 	private ObservableList projectsList = FXCollections.observableArrayList();
-	
-	
+
+	@FXML
+	private HBox sortBox = new HBox();
 	@FXML
 	private TextField filterField;
 	@FXML
 	private TableView<Project> projectTable;
 	@FXML
-	private TableColumn<Project, String> projectTitle;
+	private TableColumn<Project, String> projectTitle = new TableColumn<>();
 	@FXML
-	private TableColumn<Project, String> projectCreator;
+	private TableColumn<Project, String> projectCreator = new TableColumn<Project, String>();
 
 	@FXML
 	Button newProject;
 
 	@FXML
 	public void projectClicked() {
+		System.out.println("WEJDZ W PROJEKT" + projectsList.get((projectTable.getSelectionModel().getSelectedIndex())).toString());
 	}
 
 	@FXML
 	public void newProject() {
-	}
 
-	@FXML
-	public void sort() {
 	}
 
 	@Override
@@ -70,48 +71,41 @@ public class HomePageController implements Initializable {
 	}
 
 	private void doSomethingWithResults(ActionResult result) {
+		User loggedUser = AppContext.getLoggedUser();
+		List<String> loggedUserPermissions = loggedUser.getPermissions();
+
+		sortBox.setVisible(loggedUserPermissions.contains("showProjectsForCriteria"));
+
 		List<Project> returnedProjectsList = (List<Project>) result.getReturnObject();
 		if (returnedProjectsList != null && !returnedProjectsList.isEmpty()) {
 			projectsList = FXCollections.observableArrayList(returnedProjectsList);
 		}
-		// 0. Initialize the columns.
-				projectTitle.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getTitle()));
-				projectCreator.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUser().getId().toString()));
+		projectTitle.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getTitle()));
+		projectCreator.setCellValueFactory(
+				cellData -> new ReadOnlyStringWrapper(cellData.getValue().getUser().getId().toString()));
 
-				// 1. Wrap the ObservableList in a FilteredList (initially display all
-				// data).
-				FilteredList<Project> filteredData = new FilteredList<>(projectsList, p -> true);
+		FilteredList<Project> filteredData = new FilteredList<>(projectsList, p -> true);
 
-				// 2. Set the filter Predicate whenever the filter changes.
-				filterField.textProperty().addListener((observable, oldValue, newValue) -> {
-					filteredData.setPredicate(project -> {
-						// If filter text is empty, display all persons.
-						if (newValue == null || newValue.isEmpty()) {
-							return true;
-						}
+		filterField.textProperty().addListener((observable, oldValue, newValue) -> {
+			filteredData.setPredicate(project -> {
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
 
-						// Compare first name and last name of every person with filter
-						// text.
-						String lowerCaseFilter = newValue.toLowerCase();
+				String lowerCaseFilter = newValue.toLowerCase();
 
-						if (project.getTitle().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-							return true; // Filter matches first name.
-						} else if (project.getUser().getId().toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
-							return true; // Filter matches last name.
-						}
-						return false; // Does not match.
-					});
-				});
+				if (project.getTitle().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true;
+				} else if (project.getUser().getId().toString().toLowerCase().indexOf(lowerCaseFilter) != -1) {
+					return true;
+				}
+				return false;
+			});
+		});
 
-				// 3. Wrap the FilteredList in a SortedList.
-				SortedList<Project> sortedData = new SortedList<>(filteredData);
-
-				// 4. Bind the SortedList comparator to the TableView comparator.
-				// Otherwise, sorting the TableView would have no effect.
-				sortedData.comparatorProperty().bind(projectTable.comparatorProperty());
-
-				// 5. Add sorted (and filtered) data to the table.
-				projectTable.setItems(sortedData);
+		SortedList<Project> sortedData = new SortedList<>(filteredData);
+		sortedData.comparatorProperty().bind(projectTable.comparatorProperty());
+		projectTable.setItems(sortedData);
 	}
 
 }

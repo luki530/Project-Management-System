@@ -1,5 +1,6 @@
 package pl.com.tt.projectmanagementsystem.databaseModel;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +12,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import pl.com.tt.projectmanagementsystem.appContext.AppContext;
 import pl.com.tt.projectmanagementsystem.persistence.Persistable;
+import pl.com.tt.projectmanagementsystem.xmlUtil.Role;
+import pl.com.tt.projectmanagementsystem.xmlUtil.RolesPermissions;
 
 /**
  * The persistent class for the users database table.
@@ -65,6 +71,11 @@ public class User implements Serializable, Persistable {
 
 	public void setLogin(String login) {
 		this.login = login;
+	}
+
+	public List<String> getPermissions() {
+		this.refreshPermissions();
+		return this.permissions;
 	}
 
 	public boolean getAdministrator() {
@@ -175,6 +186,18 @@ public class User implements Serializable, Persistable {
 
 	public void refreshPermissions() {
 		List<String> userRoles = new ArrayList<>();
+		List<String> userPermissions = new ArrayList<>();
+		RolesPermissions rp = null;
+		InputStream file = ClassLoader.getSystemResourceAsStream("Permissions.xml");
+		try {
+			JAXBContext jaxbContext = JAXBContext.newInstance(RolesPermissions.class);
+			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+			rp = (RolesPermissions) jaxbUnmarshaller.unmarshal(file);
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+
+		List<Role> roles = rp.getRoles();
 		if (this.administrator) {
 			userRoles.add("ADMINISTRATOR");
 		}
@@ -184,8 +207,21 @@ public class User implements Serializable, Persistable {
 				userRoles.add(pr.getRoleBean().getRole());
 			}
 		}
-		if (AppContext.getCurrentDocument()!=null && AppContext.getCurrentDocument().getUser().equals(this)) {
-			userRoles.add("EDIT DOCUMENT");
+
+		for (Role r : roles) {
+			if (userRoles.contains(r.getName())) {
+				for (String s : r.getActions()) {
+					userPermissions.add(s);
+				}
+			}
+
 		}
+
+		if (AppContext.getCurrentDocument() != null && AppContext.getCurrentDocument().getUser().equals(this)) {
+			userPermissions.add("EDIT DOCUMENT");
+		}
+
+		this.permissions = userPermissions;
 	}
+
 }

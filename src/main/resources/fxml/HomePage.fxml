@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0"
-	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<ListView fx:id="projectList" layoutX="50.0" layoutY="50.0"
-			onMouseClicked="#projectClicked" prefHeight="620.0" prefWidth="1100.0" />
-		<Button layoutX="1177.0" layoutY="632.0" mnemonicParsing="false"
-			prefHeight="25.0" prefWidth="80.0" text="Users" />
-		<Button fx:id="newProject" layoutX="1177.0" layoutY="63.0"
-			mnemonicParsing="false" onAction="#newProject" onMouseClicked="#newProject"
-			prefHeight="25.0" prefWidth="80.0" text="New Project" />
-		<Button fx:id="sort" layoutX="1180.0" layoutY="99.0"
-			mnemonicParsing="false" onAction="#sort" onMouseClicked="#sort"
-			prefHeight="25.0" prefWidth="80.0" text="Sort" />
-		<ChoiceBox fx:id="sortBy" layoutX="1177.0" layoutY="140.0"
-			prefHeight="25.0" prefWidth="80.0" />
+		<Button layoutX="1174.0" layoutY="100.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Users" />
+		<Button fx:id="newProject" layoutX="1177.0" layoutY="63.0" mnemonicParsing="false" onAction="#newProject" onMouseClicked="#newProject" prefHeight="25.0" prefWidth="80.0" text="New Project" />
+      <Button layoutX="1175.0" layoutY="670.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="80.0" text="Logout" />
+      <TableView fx:id="projectTable" layoutX="50.0" layoutY="50.0" onMouseClicked="#projectClicked" onMouseEntered="#projectClicked" prefHeight="620.0" prefWidth="600.0">
+        <columns>
+          <TableColumn fx:id="projectTitle" editable="false" maxWidth="300.0" minWidth="20.0" prefWidth="300.0" text="Title" />
+          <TableColumn fx:id="projectCreator" editable="false" maxWidth="300.0" minWidth="20.0" prefWidth="300.0" text="Creator" />
+        </columns>
+      </TableView>
+      <HBox id="HBox" fx:id="sortBox" alignment="CENTER" layoutX="50.0" layoutY="15.0" prefHeight="25.0" prefWidth="600.0" spacing="5.0" visible="false">
+         <children>
+            <Label prefWidth="600.0" text="Filter Table:" />
+            <TextField fx:id="filterField" prefHeight="25.0" prefWidth="1041.0" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
 	</children>
 </AnchorPane>

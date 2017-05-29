@@ -22,6 +22,7 @@
 			<action>createDocument</action>
 			<action>deleteDocument</action>
 			<action>viewDocuments</action>
+			<action>sortDocuments</action>
 		</actions>
 	</role>
 	<role>
