@@ -117,4 +117,10 @@ public class Project implements Serializable, Persistable {
 		this.user = user;
 	}
 
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", description=" + description + ", title=" + title + ", documents=" + documents
+				+ ", projectRoles=" + projectRoles + ", user=" + user + "]";
+	}	
+
 }

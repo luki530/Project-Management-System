@@ -6,6 +6,7 @@ import java.util.List;
 import pl.com.tt.projectmanagementsystem.actions.Action;
 import pl.com.tt.projectmanagementsystem.actions.ActionResult;
 import pl.com.tt.projectmanagementsystem.appContext.AppContext;
+import pl.com.tt.projectmanagementsystem.databaseModel.Project;
 import pl.com.tt.projectmanagementsystem.databaseModel.ProjectRole;
 import pl.com.tt.projectmanagementsystem.persistence.Persistable;
 import pl.com.tt.projectmanagementsystem.persistence.PersistenceManager;
@@ -16,11 +17,10 @@ public class ListProjectsAction extends Action {
 	public ActionResult doOperation() {
 		try {
 			PersistenceManager persistenceManager = (PersistenceManager) getParameter("persistenceManager");
-			ProjectRole pr = new ProjectRole();
-			List<Persistable> projectRoles = persistenceManager.findAll(pr);
+			List<Persistable> projectRoles = persistenceManager.findAll(new ProjectRole());
 			List<Persistable> projectsList = new ArrayList<>();
 			if (AppContext.getLoggedUser().getAdministrator()) {
-				projectsList = persistenceManager.findAll(pr.getUserBean());
+				projectsList = persistenceManager.findAll(new Project());
 			} else if (!AppContext.getLoggedUser().getAdministrator()) {
 				for (Persistable p : projectRoles) {
 					ProjectRole projectRole = (ProjectRole) p;
@@ -33,6 +33,7 @@ public class ListProjectsAction extends Action {
 			actionResult.setReturnObject(projectsList);
 			return actionResult;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return new ActionResult("ERROR");
 		}
 	}
