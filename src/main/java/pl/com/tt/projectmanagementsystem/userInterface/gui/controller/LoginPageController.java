@@ -13,47 +13,48 @@ import pl.com.tt.projectmanagementsystem.actions.implementations.LoginAction;
 import pl.com.tt.projectmanagementsystem.userInterface.gui.GraphicsUserInterface;
 
 public class LoginPageController implements Initializable {
-    
-    private GraphicsUserInterface gui;
-    private ActionResult result;
-    
-    @FXML
-    private TextField login;
-    @FXML
-    private TextField password;
-    
-    public LoginPageController(GraphicsUserInterface gui) {
-        this.gui = gui;
-    }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+	private GraphicsUserInterface gui;
+	private ActionResult result;
+
+	@FXML
+	private TextField login;
+	@FXML
+	private TextField password;
+
+	public LoginPageController(GraphicsUserInterface gui) {
+		this.gui = gui;
+	}
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+	}
+
+	@FXML
+	private void submit() {
+		Action loginAction = new LoginAction();
+		loginAction.setParameter("login", login.getText());
+		loginAction.setParameter("password", password.getText());
+		// Task task = new Task<Void>() {
+		// @Override public Void call() {
+
+		gui.addActionToQueue(loginAction);
+		result = gui.getActionResultFromQueue();
+		while (result == null) {
+			result = gui.getActionResultFromQueue();
+		}
+		doSomethingWithResults(result);
+		// return null;
+		// }
+		// };
+
+	}
+
+	private void doSomethingWithResults(ActionResult result) {
+        if(result.getActionStatus().equals("OK"))
+        	gui.changeSceneTo("homePage");
+        else System.out.println("error");
         
-    }
-    
-    @FXML
-    private void submit() {
-        Action loginAction = new LoginAction();
-        loginAction.setParameter("login", login.getText());
-        loginAction.setParameter("password", password.getText());
-//        Task task = new Task<Void>() {
-//            @Override public Void call() {
-            	
-                    gui.addActionToQueue(loginAction);
-                    result = gui.getActionResultFromQueue();
-                    while (result == null) {
-                        result = gui.getActionResultFromQueue();
-                    }
-                    System.out.println("login");
-                    doSomethingWithResults(result);
-//                return null;
-//            }
-//        };
-        
-    }
-    
-    private void doSomethingWithResults(ActionResult result) {
-        result.getActionStatus(); // Jak ERROR to wyświetlić informację
-        gui.changeSceneTo("homePage");
     };
 }

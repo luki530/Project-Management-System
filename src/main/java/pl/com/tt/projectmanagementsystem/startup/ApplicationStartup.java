@@ -21,7 +21,7 @@ public class ApplicationStartup extends Application {
 	public void start(Stage stage) throws Exception {
 	    GraphicsUserInterface gui = GraphicsUserInterface.getInstance();
 	    gui.setStage(stage);
-	    gui.changeSceneTo("homePage");
+	    gui.changeSceneTo("loginPage");
 	    config.setUserInterface(gui);
 		mainApp = new MainApp(config);
 		mainAppExecutor.execute(mainApp);

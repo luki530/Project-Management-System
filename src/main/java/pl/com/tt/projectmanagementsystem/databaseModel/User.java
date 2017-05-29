@@ -184,7 +184,7 @@ public class User implements Serializable, Persistable {
 				userRoles.add(pr.getRoleBean().getRole());
 			}
 		}
-		if (AppContext.getCurrentDocument().getUser().equals(this)) {
+		if (AppContext.getCurrentDocument()!=null && AppContext.getCurrentDocument().getUser().equals(this)) {
 			userRoles.add("EDIT DOCUMENT");
 		}
 	}
