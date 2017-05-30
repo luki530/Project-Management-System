@@ -19,7 +19,7 @@ public class ListProjectsAction extends Action {
 			PersistenceManager persistenceManager = (PersistenceManager) getParameter("persistenceManager");
 			List<Persistable> projectRoles = persistenceManager.findAll(new ProjectRole());
 			List<Persistable> projectsList = new ArrayList<>();
-			if (AppContext.getLoggedUser().getAdministrator()) {
+			if (AppContext.getLoggedUser().getPermissions().contains("listAllProjects")) {
 				projectsList = persistenceManager.findAll(new Project());
 			} else if (!AppContext.getLoggedUser().getAdministrator()) {
 				for (Persistable p : projectRoles) {

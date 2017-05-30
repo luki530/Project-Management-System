@@ -16,6 +16,7 @@ public class AppContext {
 
     public static void setCurrentDocument(Document currentDocument) {
         AppContext.currentDocument = currentDocument;
+        if(AppContext.getLoggedUser()!=null)
         AppContext.getLoggedUser().refreshPermissions();
     }
 
@@ -25,6 +26,7 @@ public class AppContext {
 
     public static void setLoggedUser(User loggedUser) {
         AppContext.loggedUser = loggedUser;
+        if(AppContext.getLoggedUser()!=null)
         AppContext.getLoggedUser().refreshPermissions();
     }
 
@@ -34,6 +36,7 @@ public class AppContext {
 
     public static void setCurrentProject(Project currentProject) {
         AppContext.currentProject = currentProject;
+        if(AppContext.getLoggedUser()!=null)
         AppContext.getLoggedUser().refreshPermissions();
     }
 

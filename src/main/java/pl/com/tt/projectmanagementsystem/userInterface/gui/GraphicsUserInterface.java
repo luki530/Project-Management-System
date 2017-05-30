@@ -12,9 +12,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import pl.com.tt.projectmanagementsystem.actions.Action;
 import pl.com.tt.projectmanagementsystem.actions.ActionResult;
+import pl.com.tt.projectmanagementsystem.appContext.AppContext;
+import pl.com.tt.projectmanagementsystem.databaseModel.Project;
 import pl.com.tt.projectmanagementsystem.userInterface.UserInterface;
 import pl.com.tt.projectmanagementsystem.userInterface.gui.controller.HomePageController;
 import pl.com.tt.projectmanagementsystem.userInterface.gui.controller.LoginPageController;
+import pl.com.tt.projectmanagementsystem.userInterface.gui.controller.ProjectDetailsController;
 
 public class GraphicsUserInterface implements UserInterface {
 
@@ -71,6 +74,8 @@ public class GraphicsUserInterface implements UserInterface {
 	}
 
 	public void changeSceneTo(String sceneName) {
+		if(AppContext.getLoggedUser()!=null)
+		AppContext.getLoggedUser().refreshPermissions();
 		switch (sceneName) {
 		case "loginPage":
 			LoginPageController loginPageController = new LoginPageController(this);
@@ -81,6 +86,11 @@ public class GraphicsUserInterface implements UserInterface {
 			HomePageController homePageController = new HomePageController(this);
 			URL homePageUrl = getClass().getClassLoader().getResource("fxml/HomePage.fxml");
 			setScene(homePageController, homePageUrl);
+			break;
+		case "projectDetails":
+			ProjectDetailsController projectDetailsController = new ProjectDetailsController(this);
+			URL projectDetailsUrl = getClass().getClassLoader().getResource("fxml/ProjectDetails.fxml");
+			setScene(projectDetailsController, projectDetailsUrl);
 			break;
 		default:
 			break;

@@ -4,8 +4,14 @@ import java.util.Collection;
 
 import pl.com.tt.projectmanagementsystem.actions.Action;
 import pl.com.tt.projectmanagementsystem.actions.ActionResult;
+import pl.com.tt.projectmanagementsystem.actions.implementations.CreateNewProjectRoleAction;
+import pl.com.tt.projectmanagementsystem.actions.implementations.CreateProjectAction;
+import pl.com.tt.projectmanagementsystem.actions.implementations.CreateUserAction;
+import pl.com.tt.projectmanagementsystem.actions.implementations.DeleteProjectAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.ListProjectsAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.LoginAction;
+import pl.com.tt.projectmanagementsystem.actions.implementations.LogoutAction;
+import pl.com.tt.projectmanagementsystem.actions.implementations.ProjectDetailsAction;
 import pl.com.tt.projectmanagementsystem.persistence.PersistenceManager;
 import pl.com.tt.projectmanagementsystem.userInterface.UserInterface;
 import pl.com.tt.projectmanagementsystem.xmlUtil.XmlWatcher;
@@ -74,6 +80,30 @@ public class MainApp implements Runnable {
 			ListProjectsAction listProjectsAction = (ListProjectsAction) action;
 			listProjectsAction.setParameter("persistenceManager", persistenceManager);
 			return listProjectsAction.doOperation();
+		case "LogoutAction":
+			LogoutAction logoutAction = (LogoutAction) action;
+			return logoutAction.doOperation();
+		case "CreateProjectAction":
+			CreateProjectAction createProjectAction = (CreateProjectAction) action;
+			createProjectAction.setParameter("persistenceManager", persistenceManager);
+			return createProjectAction.doOperation();
+		case "CreateUserAction":
+			CreateUserAction createUserAction = (CreateUserAction) action;
+			createUserAction.setParameter("persistenceManager", persistenceManager);
+			return createUserAction.doOperation();
+		case "ProjectDetailsAction":
+			ProjectDetailsAction projectDetailsAction = (ProjectDetailsAction) action;
+			projectDetailsAction.setParameter("persistenceManager", persistenceManager);
+			return projectDetailsAction.doOperation();
+		case "CreateNewProjectRoleAction":
+			CreateNewProjectRoleAction createNewProjectRoleAction = (CreateNewProjectRoleAction) action;
+			createNewProjectRoleAction.setParameter("persistenceManager", persistenceManager);
+			return createNewProjectRoleAction.doOperation();
+		case "DeleteProjectAction":
+			DeleteProjectAction deleteProjectAction = (DeleteProjectAction) action;
+			deleteProjectAction.setParameter("persistenceManager", persistenceManager);
+			return deleteProjectAction.doOperation();
+			
 		default:
 			return null;
 		}

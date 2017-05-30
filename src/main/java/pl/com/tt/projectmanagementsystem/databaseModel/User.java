@@ -185,43 +185,44 @@ public class User implements Serializable, Persistable {
 	}
 
 	public void refreshPermissions() {
-		List<String> userRoles = new ArrayList<>();
-		List<String> userPermissions = new ArrayList<>();
-		RolesPermissions rp = null;
-		InputStream file = ClassLoader.getSystemResourceAsStream("Permissions.xml");
-		try {
-			JAXBContext jaxbContext = JAXBContext.newInstance(RolesPermissions.class);
-			Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-			rp = (RolesPermissions) jaxbUnmarshaller.unmarshal(file);
-		} catch (JAXBException e) {
-			e.printStackTrace();
-		}
-
-		List<Role> roles = rp.getRoles();
-		if (this.administrator) {
-			userRoles.add("ADMINISTRATOR");
-		}
-		List<ProjectRole> projectRoles = this.getProjectRoles();
-		for (ProjectRole pr : projectRoles) {
-			if (pr.getProjectBean().equals(AppContext.getCurrentProject())) {
-				userRoles.add(pr.getRoleBean().getRole());
+		if (this != null) {
+			List<String> userRoles = new ArrayList<>();
+			List<String> userPermissions = new ArrayList<>();
+			RolesPermissions rp = null;
+			InputStream file = ClassLoader.getSystemResourceAsStream("Permissions.xml");
+			try {
+				JAXBContext jaxbContext = JAXBContext.newInstance(RolesPermissions.class);
+				Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+				rp = (RolesPermissions) jaxbUnmarshaller.unmarshal(file);
+			} catch (JAXBException e) {
+				e.printStackTrace();
 			}
-		}
 
-		for (Role r : roles) {
-			if (userRoles.contains(r.getName())) {
-				for (String s : r.getActions()) {
-					userPermissions.add(s);
+			List<Role> roles = rp.getRoles();
+			if (this.administrator) {
+				userRoles.add("ADMINISTRATOR");
+			}
+			List<ProjectRole> projectRoles = this.getProjectRoles();
+			for (ProjectRole pr : projectRoles) {
+				if (pr.getProjectBean().equals(AppContext.getCurrentProject())) {
+					userRoles.add(pr.getRoleBean().getRole());
 				}
 			}
 
-		}
+			for (Role r : roles) {
+				if (userRoles.contains(r.getName())) {
+					for (String s : r.getActions()) {
+						userPermissions.add(s);
+					}
+				}
 
-		if (AppContext.getCurrentDocument() != null && AppContext.getCurrentDocument().getUser().equals(this)) {
-			userPermissions.add("EDIT DOCUMENT");
-		}
+			}
 
-		this.permissions = userPermissions;
+			if (AppContext.getCurrentDocument() != null && AppContext.getCurrentDocument().getUser().equals(this)) {
+				userPermissions.add("EDIT DOCUMENT");
+			}
+
+			this.permissions = userPermissions;
+		}
 	}
-
 }

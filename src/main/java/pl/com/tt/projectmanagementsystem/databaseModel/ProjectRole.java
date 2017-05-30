@@ -16,7 +16,7 @@ import pl.com.tt.projectmanagementsystem.persistence.Persistable;
 public class ProjectRole implements Serializable, Persistable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	//bi-directional many-to-one association to User

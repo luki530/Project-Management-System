@@ -1,0 +1,12 @@
+ALTER TABLE documents DROP FOREIGN KEY FK_documents_project
+ALTER TABLE documents DROP FOREIGN KEY FK_documents_creator
+ALTER TABLE project_roles DROP FOREIGN KEY FK_project_roles_project
+ALTER TABLE project_roles DROP FOREIGN KEY FK_project_roles_user
+ALTER TABLE project_roles DROP FOREIGN KEY FK_project_roles_role
+ALTER TABLE projects DROP FOREIGN KEY FK_projects_creator
+DROP TABLE documents
+DROP TABLE project_roles
+DROP TABLE projects
+DROP TABLE roles
+DROP TABLE users
+DELETE FROM SEQUENCE WHERE SEQ_NAME = 'SEQ_GEN'

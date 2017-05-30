@@ -18,7 +18,7 @@ import java.util.List;
 public class Project implements Serializable, Persistable {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+	@Id@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	private String description;
