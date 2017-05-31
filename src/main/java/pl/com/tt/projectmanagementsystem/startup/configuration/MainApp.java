@@ -7,7 +7,9 @@ import pl.com.tt.projectmanagementsystem.actions.ActionResult;
 import pl.com.tt.projectmanagementsystem.actions.implementations.CreateNewProjectRoleAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.CreateProjectAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.CreateUserAction;
+import pl.com.tt.projectmanagementsystem.actions.implementations.DeleteDocumentAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.DeleteProjectAction;
+import pl.com.tt.projectmanagementsystem.actions.implementations.DocumentTextChangeAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.ListProjectsAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.LoginAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.LogoutAction;
@@ -108,7 +110,15 @@ public class MainApp implements Runnable {
 			NewDocumentAction newDocumentAction = (NewDocumentAction) action;
 			newDocumentAction.setParameter("persistenceManager", persistenceManager);
 			return newDocumentAction.doOperation();
-
+		case "DeleteDocumentAction":
+			DeleteDocumentAction deleteDocumentAction = (DeleteDocumentAction) action;
+			deleteDocumentAction.setParameter("persistenceManager", persistenceManager);
+			return deleteDocumentAction.doOperation();
+		case "DocumentTextChangeAction":
+			DocumentTextChangeAction documentTextChangeAction = (DocumentTextChangeAction) action;
+			documentTextChangeAction.setParameter("persistenceManager", persistenceManager);
+			return documentTextChangeAction.doOperation();
+			
 		default:
 			return null;
 		}

@@ -6,7 +6,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextArea fx:id="text" editable="false" layoutX="50.0" layoutY="50.0" prefHeight="620.0" prefWidth="900.0" visible="false" />
+      <TextArea fx:id="text" editable="false" layoutX="50.0" layoutY="50.0" prefHeight="620.0" prefWidth="900.0" visible="false" wrapText="true" />
       <Button fx:id="logout" layoutX="1185.0" layoutY="680.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="80.0" text="Logout" />
       <Button fx:id="deleteDocument" layoutX="1058.0" layoutY="688.0" mnemonicParsing="false" onAction="#deleteDocument" prefHeight="25.0" prefWidth="80.0" text="Delete" visible="false" />
       <Button fx:id="save" layoutX="1084.0" layoutY="63.0" mnemonicParsing="false" onAction="#save" text="Save" visible="false" />

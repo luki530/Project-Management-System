@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import pl.com.tt.projectmanagementsystem.actions.ActionResult;
+import pl.com.tt.projectmanagementsystem.actions.implementations.DeleteDocumentAction;
+import pl.com.tt.projectmanagementsystem.actions.implementations.DocumentTextChangeAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.LogoutAction;
 import pl.com.tt.projectmanagementsystem.appContext.AppContext;
 import pl.com.tt.projectmanagementsystem.userInterface.gui.GraphicsUserInterface;
@@ -27,18 +29,25 @@ public class DocumentDetailsController implements Initializable {
 
 	private GraphicsUserInterface gui;
 	private ActionResult result;
-	
+
 	public DocumentDetailsController(GraphicsUserInterface gui) {
 		this.gui = gui;
 	}
 
 	@FXML
-	void deleteDocument() {
-
+	public void deleteDocument() {
+		DeleteDocumentAction deleteDocumentAction = new DeleteDocumentAction();
+		gui.addActionToQueue(deleteDocumentAction);
+		result = gui.getActionResultFromQueue();
+		while (result == null) {
+			result = gui.getActionResultFromQueue();
+		}
+		if (result.getActionStatus().equals("OK"))
+			gui.changeSceneTo("projectDetails");
 	}
 
 	@FXML
-	void logout() {
+	public void logout() {
 		LogoutAction logoutAction = new LogoutAction();
 		gui.addActionToQueue(logoutAction);
 		result = gui.getActionResultFromQueue();
@@ -51,8 +60,15 @@ public class DocumentDetailsController implements Initializable {
 
 	@FXML
 	void save() {
-		
-
+		DocumentTextChangeAction documentTextChangeAction = new DocumentTextChangeAction();
+		documentTextChangeAction.setParameter("newText", text.getText());
+		gui.addActionToQueue(documentTextChangeAction);
+		result = gui.getActionResultFromQueue();
+		while (result == null) {
+			result = gui.getActionResultFromQueue();
+		}
+		if (result.getActionStatus().equals("OK"))
+			gui.changeSceneTo("documentDetails");
 	}
 
 	@Override

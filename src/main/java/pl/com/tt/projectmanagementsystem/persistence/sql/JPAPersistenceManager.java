@@ -62,7 +62,8 @@ public class JPAPersistenceManager implements PersistenceManager {
 	@Override
 	public void update(Persistable persistable) {
 	    beginTransaction();
-	    entityManager.refresh(persistable);
+	    entityManager.remove(persistable);
+	    entityManager.persist(persistable);
 	    commitTransaction();
 	}
 

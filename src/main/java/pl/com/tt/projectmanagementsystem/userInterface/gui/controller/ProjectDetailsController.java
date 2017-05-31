@@ -154,7 +154,7 @@ public class ProjectDetailsController implements Initializable {
 				if (AppContext.getLoggedUser().getPermissions().contains("viewDocuments")
 						|| AppContext.getLoggedUser().getPermissions().contains("deleteDocument")
 						|| AppContext.getLoggedUser().getPermissions().contains("EDIT DOCUMENT"))
-					AppContext.setCurrentDocument(documents.getSelectionModel().getSelectedItem());
+					AppContext.setCurrentDocument(row);
 				gui.changeSceneTo("documentDetails");
 			} else {
 				lastClickTime = new Date();
