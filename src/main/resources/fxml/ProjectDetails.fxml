@@ -19,12 +19,12 @@
       <Button fx:id="newRole" layoutX="400.0" layoutY="50.0" mnemonicParsing="false" onAction="#newRole" prefHeight="25.0" prefWidth="80.0" text="New Role" visible="false" />
       <SplitMenuButton fx:id="newUserRole" layoutX="375.0" layoutY="100.0" mnemonicParsing="false" text="User" visible="false" />
       <SplitMenuButton fx:id="newRoleRole" layoutX="375.0" layoutY="150.0" mnemonicParsing="false" text="Role" visible="false" />
-      <TableView fx:id="documents" layoutX="500.0" layoutY="50.0" prefHeight="620.0" prefWidth="500.0" visible="false">
+      <TableView fx:id="documents" layoutX="500.0" layoutY="50.0" onMouseClicked="#handleRowSelect" prefHeight="620.0" prefWidth="500.0" visible="false">
         <columns>
-          <TableColumn fx:id="documentName" maxWidth="425.0" minWidth="25.0" prefWidth="125.0" text="Name" />
-          <TableColumn fx:id="documentDescription" maxWidth="425.0" minWidth="25.0" prefWidth="125.0" text="Description" />
-            <TableColumn fx:id="documentCreator" maxWidth="425.0" minWidth="25.0" prefWidth="125.0" text="Creator" />
-            <TableColumn fx:id="documentTopic" maxWidth="425.0" minWidth="25.0" prefWidth="125.0" text="Topic" />
+          <TableColumn fx:id="documentName" maxWidth="425.0" minWidth="25.0" prefWidth="125.0" sortable="false" text="Name" />
+          <TableColumn fx:id="documentDescription" maxWidth="425.0" minWidth="25.0" prefWidth="125.0" sortable="false" text="Description" />
+            <TableColumn fx:id="documentCreator" maxWidth="425.0" minWidth="25.0" prefWidth="125.0" sortable="false" text="Creator" />
+            <TableColumn fx:id="documentTopic" maxWidth="425.0" minWidth="25.0" prefWidth="125.0" sortable="false" text="Topic" />
         </columns>
       </TableView>
       <Button fx:id="logout" layoutX="1185.0" layoutY="680.0" mnemonicParsing="false" onAction="#logout" prefHeight="25.0" prefWidth="80.0" text="Logout" />

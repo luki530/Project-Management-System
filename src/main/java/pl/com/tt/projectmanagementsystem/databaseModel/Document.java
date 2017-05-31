@@ -32,6 +32,16 @@ public class Document implements Serializable, Persistable {
 	private String title;
 
 	private String topic;
+	
+	private String text;
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
 
 	//bi-directional many-to-one association to User
 	@ManyToOne

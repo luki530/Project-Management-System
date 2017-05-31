@@ -1,6 +1,7 @@
 package pl.com.tt.projectmanagementsystem.userInterface.gui.controller;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -24,9 +25,11 @@ import pl.com.tt.projectmanagementsystem.actions.ActionResult;
 import pl.com.tt.projectmanagementsystem.actions.implementations.CreateNewProjectRoleAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.DeleteProjectAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.LogoutAction;
+import pl.com.tt.projectmanagementsystem.actions.implementations.NewDocumentAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.ProjectDetailsAction;
 import pl.com.tt.projectmanagementsystem.appContext.AppContext;
 import pl.com.tt.projectmanagementsystem.databaseModel.Document;
+import pl.com.tt.projectmanagementsystem.databaseModel.Project;
 import pl.com.tt.projectmanagementsystem.databaseModel.ProjectRole;
 import pl.com.tt.projectmanagementsystem.databaseModel.Role;
 import pl.com.tt.projectmanagementsystem.databaseModel.User;
@@ -92,6 +95,8 @@ public class ProjectDetailsController implements Initializable {
 
 	User userToRole;
 	Role roleToRole;
+	Document temp;
+	Date lastClickTime;
 
 	@FXML
 	void deleteProject(ActionEvent event) {
@@ -119,7 +124,42 @@ public class ProjectDetailsController implements Initializable {
 
 	@FXML
 	void newDocument(ActionEvent event) {
+		NewDocumentAction newDocumentAction = new NewDocumentAction();
+		newDocumentAction.setParameter("description", newDocumentDescription.getText());
+		newDocumentAction.setParameter("title", newDocumentName.getText());
+		newDocumentAction.setParameter("topic", newDocumentTopic.getText());
+		gui.addActionToQueue(newDocumentAction);
+		result = gui.getActionResultFromQueue();
+		while (result == null) {
+			result = gui.getActionResultFromQueue();
+		}
+		if (result.getActionStatus().equals("OK")) {
+			gui.changeSceneTo("projectDetails");
+		}
 
+	}
+
+	@FXML
+	private void handleRowSelect() {
+		Document row = documents.getSelectionModel().getSelectedItem();
+		if (row == null)
+			return;
+		if (row != temp) {
+			temp = row;
+			lastClickTime = new Date();
+		} else if (row == temp) {
+			Date now = new Date();
+			long diff = now.getTime() - lastClickTime.getTime();
+			if (diff < 300) {
+				if (AppContext.getLoggedUser().getPermissions().contains("viewDocuments")
+						|| AppContext.getLoggedUser().getPermissions().contains("deleteDocument")
+						|| AppContext.getLoggedUser().getPermissions().contains("EDIT DOCUMENT"))
+					AppContext.setCurrentDocument(documents.getSelectionModel().getSelectedItem());
+				gui.changeSceneTo("documentDetails");
+			} else {
+				lastClickTime = new Date();
+			}
+		}
 	}
 
 	@FXML
@@ -148,6 +188,10 @@ public class ProjectDetailsController implements Initializable {
 		newUserRole.setVisible(AppContext.getLoggedUser().getPermissions().contains("addUserToRole"));
 		newRoleRole.setVisible(AppContext.getLoggedUser().getPermissions().contains("addUserToRole"));
 		documents.setVisible(AppContext.getLoggedUser().getPermissions().contains("viewDocuments"));
+		documentName.setSortable(AppContext.getLoggedUser().getPermissions().contains("sortDocuments"));
+		documentDescription.setSortable(AppContext.getLoggedUser().getPermissions().contains("sortDocuments"));
+		documentTopic.setSortable(AppContext.getLoggedUser().getPermissions().contains("sortDocuments"));
+		documentCreator.setSortable(AppContext.getLoggedUser().getPermissions().contains("sortDocuments"));
 		deleteProject.setVisible(AppContext.getLoggedUser().getPermissions().contains("deleteProject"));
 		newDocument.setVisible(AppContext.getLoggedUser().getPermissions().contains("createDocument"));
 		newDocumentName.setVisible(AppContext.getLoggedUser().getPermissions().contains("createDocument"));

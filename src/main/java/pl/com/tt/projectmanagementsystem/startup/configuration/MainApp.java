@@ -11,6 +11,7 @@ import pl.com.tt.projectmanagementsystem.actions.implementations.DeleteProjectAc
 import pl.com.tt.projectmanagementsystem.actions.implementations.ListProjectsAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.LoginAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.LogoutAction;
+import pl.com.tt.projectmanagementsystem.actions.implementations.NewDocumentAction;
 import pl.com.tt.projectmanagementsystem.actions.implementations.ProjectDetailsAction;
 import pl.com.tt.projectmanagementsystem.persistence.PersistenceManager;
 import pl.com.tt.projectmanagementsystem.userInterface.UserInterface;
@@ -103,7 +104,11 @@ public class MainApp implements Runnable {
 			DeleteProjectAction deleteProjectAction = (DeleteProjectAction) action;
 			deleteProjectAction.setParameter("persistenceManager", persistenceManager);
 			return deleteProjectAction.doOperation();
-			
+		case "NewDocumentAction":
+			NewDocumentAction newDocumentAction = (NewDocumentAction) action;
+			newDocumentAction.setParameter("persistenceManager", persistenceManager);
+			return newDocumentAction.doOperation();
+
 		default:
 			return null;
 		}

@@ -15,6 +15,7 @@ import pl.com.tt.projectmanagementsystem.actions.ActionResult;
 import pl.com.tt.projectmanagementsystem.appContext.AppContext;
 import pl.com.tt.projectmanagementsystem.databaseModel.Project;
 import pl.com.tt.projectmanagementsystem.userInterface.UserInterface;
+import pl.com.tt.projectmanagementsystem.userInterface.gui.controller.DocumentDetailsController;
 import pl.com.tt.projectmanagementsystem.userInterface.gui.controller.HomePageController;
 import pl.com.tt.projectmanagementsystem.userInterface.gui.controller.LoginPageController;
 import pl.com.tt.projectmanagementsystem.userInterface.gui.controller.ProjectDetailsController;
@@ -92,6 +93,12 @@ public class GraphicsUserInterface implements UserInterface {
 			URL projectDetailsUrl = getClass().getClassLoader().getResource("fxml/ProjectDetails.fxml");
 			setScene(projectDetailsController, projectDetailsUrl);
 			break;
+		case "documentDetails":
+			DocumentDetailsController documentDetailsController = new DocumentDetailsController(this);
+			URL documentDetailsUrl = getClass().getClassLoader().getResource("fxml/DocumentDetails.fxml");
+			setScene(documentDetailsController, documentDetailsUrl);
+			break;
+			
 		default:
 			break;
 		}
