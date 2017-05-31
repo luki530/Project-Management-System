@@ -35,14 +35,15 @@ public class ProjectDetailsAction extends Action {
 			List<Persistable> roles = persistenceManager.findAll(new Role());
 			returnMap.put("users", users);
 			returnMap.put("roles", roles);
+			List<Persistable> projectDocuments = new ArrayList<>();
 			List<Persistable> documents = persistenceManager.findAll(new Document());
 			for (Persistable d : documents) {
 				Document document = (Document) d;
-				if (!document.getProjectBean().equals(AppContext.getCurrentProject())) {
-					documents.remove(document);
+				if (document.getProjectBean().equals(AppContext.getCurrentProject())) {
+					projectDocuments.add(document);
 				}
 			}
-			returnMap.put("documents", documents);
+			returnMap.put("documents", projectDocuments);
 			ActionResult ar = new ActionResult("OK");
 			ar.setReturnObject(returnMap);
 			return ar;

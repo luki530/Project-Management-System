@@ -164,16 +164,18 @@ public class ProjectDetailsController implements Initializable {
 
 	@FXML
 	void newRole(ActionEvent event) {
-		CreateNewProjectRoleAction createNewProjectRoleAction = new CreateNewProjectRoleAction();
-		createNewProjectRoleAction.setParameter("user", userToRole);
-		createNewProjectRoleAction.setParameter("role", roleToRole);
-		gui.addActionToQueue(createNewProjectRoleAction);
-		result = gui.getActionResultFromQueue();
-		while (result == null) {
+		if (userToRole != null && roleToRole != null) {
+			CreateNewProjectRoleAction createNewProjectRoleAction = new CreateNewProjectRoleAction();
+			createNewProjectRoleAction.setParameter("user", userToRole);
+			createNewProjectRoleAction.setParameter("role", roleToRole);
+			gui.addActionToQueue(createNewProjectRoleAction);
 			result = gui.getActionResultFromQueue();
-		}
-		if (result.getActionStatus().equals("OK")) {
-			gui.changeSceneTo("projectDetails");
+			while (result == null) {
+				result = gui.getActionResultFromQueue();
+			}
+			if (result.getActionStatus().equals("OK")) {
+				gui.changeSceneTo("projectDetails");
+			}
 		}
 	}
 
@@ -219,7 +221,8 @@ public class ProjectDetailsController implements Initializable {
 			List<ProjectRole> currentProjectRolesList = (List<ProjectRole>) resultMap.get("currentProjectRoles");
 			if (currentProjectRolesList != null) {
 				projectRolesList = FXCollections.observableArrayList(currentProjectRolesList);
-				projectroles.setItems(projectRolesList);
+				if (projectRolesList != null)
+					projectroles.setItems(projectRolesList);
 			}
 			List<User> usersList = (List<User>) resultMap.get("users");
 			if (usersList != null) {

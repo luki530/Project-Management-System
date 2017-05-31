@@ -52,9 +52,11 @@ public class LoginPageController implements Initializable {
 	}
 
 	private void doSomethingWithResults(ActionResult result) {
-        if(result.getActionStatus().equals("OK"))
-        	gui.changeSceneTo("homePage");
-        else System.out.println("error");
-        
-    };
+		if (result.getActionStatus().equals("OK"))
+			gui.changeSceneTo("homePage");
+		else {
+			gui.showError("Incorrent login or passoword");
+		}
+
+	};
 }

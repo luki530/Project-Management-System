@@ -17,4 +17,6 @@ public interface UserInterface{
 	Action getActionFromQueue();
 	
 	void addActionToQueue(Action action);
+	
+	void showError(String prompt);
 }

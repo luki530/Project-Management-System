@@ -6,14 +6,23 @@ import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pl.com.tt.projectmanagementsystem.actions.Action;
 import pl.com.tt.projectmanagementsystem.actions.ActionResult;
 import pl.com.tt.projectmanagementsystem.appContext.AppContext;
-import pl.com.tt.projectmanagementsystem.databaseModel.Project;
+import pl.com.tt.projectmanagementsystem.databaseModel.User;
 import pl.com.tt.projectmanagementsystem.userInterface.UserInterface;
 import pl.com.tt.projectmanagementsystem.userInterface.gui.controller.DocumentDetailsController;
 import pl.com.tt.projectmanagementsystem.userInterface.gui.controller.HomePageController;
@@ -75,8 +84,8 @@ public class GraphicsUserInterface implements UserInterface {
 	}
 
 	public void changeSceneTo(String sceneName) {
-		if(AppContext.getLoggedUser()!=null)
-		AppContext.getLoggedUser().refreshPermissions();
+		if (AppContext.getLoggedUser() != null)
+			AppContext.getLoggedUser().refreshPermissions();
 		switch (sceneName) {
 		case "loginPage":
 			LoginPageController loginPageController = new LoginPageController(this);
@@ -98,7 +107,7 @@ public class GraphicsUserInterface implements UserInterface {
 			URL documentDetailsUrl = getClass().getClassLoader().getResource("fxml/DocumentDetails.fxml");
 			setScene(documentDetailsController, documentDetailsUrl);
 			break;
-			
+
 		default:
 			break;
 		}
@@ -116,5 +125,25 @@ public class GraphicsUserInterface implements UserInterface {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+	}
+
+	@Override
+	public void showError(String prompt) {
+		Stage dialogStage = new Stage();
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		Button button = new Button("OK");
+		button.setOnAction(new EventHandler() {
+			@Override
+			public void handle(Event e) {
+				dialogStage.close();
+			}
+		});
+		VBox vbox = new VBox(new Text(prompt), button);
+		vbox.setAlignment(Pos.CENTER);
+		vbox.setPadding(new Insets(15));
+
+		dialogStage.setScene(new Scene(vbox));
+		dialogStage.show();
+
 	}
 }
