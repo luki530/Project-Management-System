@@ -1,15 +1,6 @@
 # Project-Management-System
 
-
-## How does it work ?
-
-
-
-## Functionalities
-
-<details><summary>Show</summary>
-  
-</details>
+Application for company to easily manage their projects. Depending on role user can do some different activities.
 
 ## Technologies
 
